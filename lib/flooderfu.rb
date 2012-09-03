@@ -1,5 +1,3 @@
 require "flooderfu/version"
-
-module Flooderfu
-  # Your code goes here...
-end
+require 'flooderfu/syn'
+require 'flooderfu/icmp'

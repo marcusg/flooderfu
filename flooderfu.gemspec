@@ -6,10 +6,10 @@ Gem::Specification.new do |gem|
   gem.email         = ["marcus3006@gmail.com"]
   gem.description   = %q{flooding devices with packets}
   gem.summary       = %q{script collection for flooding devices with different types of packets}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/marcusg/flooderfu"
 
   gem.files         = `git ls-files`.split($\)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.executables   = ["flooderfu"]
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "flooderfu"
   gem.require_paths = ["lib"]

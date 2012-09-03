@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+
+require 'flooderfu'
+require 'optparse'
+require 'pp'
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+
+  options[:destination_ip] = ""
+  opts.on( '-di', '--destination-ip IP', "IP of destination device" ) do |f|
+    options[:destination_ip] = f
+  end
+
+  options[:destination_mac] = ""
+  opts.on( '-dm', '--destination-mac MAC', "MAC of destination device" ) do |f|
+    options[:destination_mac] = f
+  end
+
+  options[:destination_port] = ""
+  opts.on( '-dp', '--destination-port PORT', "Port number of destination device" ) do |f|
+    options[:destination_port] = f
+  end
+
+  options[:source_ip] = ""
+  opts.on( '-si', '--source-ip IP', "IP of source device" ) do |f|
+    options[:source_ip] = f
+  end
+
+  options[:source_mac] = ""
+  opts.on( '-sm', '--source-mac MAC', "MAC of source device" ) do |f|
+    options[:source_mac] = f
+  end
+
+  options[:size] = 10
+  opts.on( '-s', '--size INTEGER', "Size of the array to inject (default: 10)" ) do |f|
+    options[:size] = f
+  end
+
+  options[:runs] = 100
+  opts.on( '-r', '--runs INTEGER', "How many iterations (default: 100)" ) do |f|
+    options[:runs] = f
+  end
+
+  options[:load] = 8
+  opts.on( '-l', '--load INTEGER', "Size of the payload (default: 8)" ) do |f|
+    options[:load] = f
+  end
+
+  options[:interface] = "eth0"
+  opts.on( '-i', '--interface INTERFACE', "Name of the interface (default: eth0)" ) do |f|
+    options[:interface] = f
+  end
+
+  options[:ttl] = 64
+  opts.on( '-t', '--ttl INTEGER', "Time to live (ttl) (default: 64)" ) do |f|
+    options[:ttl] = f
+  end
+
+  opts.on('-h', '--help', 'Display this screen') do
+    puts opts
+    exit
+  end
+end
+
+
+optparse.parse!
+
+pp "Options:", options
+pp "ARGV:", ARGV
+Flooderfu::Syn.new
