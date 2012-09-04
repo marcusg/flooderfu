@@ -8,58 +8,69 @@ options = {}
 
 optparse = OptionParser.new do |opts|
 
-  options[:destination_ip] = ""
-  opts.on( '-di', '--destination-ip IP', "IP of destination device" ) do |f|
+  opts.banner = "Usage: example.rb [options]"
+
+  opts.separator ""
+  opts.separator "Specific options:"
+
+  opts.on( '-x', '--mode TYPE', [:syn, :icmp], "Select a type of attack (syn or icmp)" ) do |f|
+    options[:mode] = f
+  end
+
+  opts.on( '-d', '--destination-ip IP', "IP of destination device" ) do |f|
     options[:destination_ip] = f
   end
 
-  options[:destination_mac] = ""
-  opts.on( '-dm', '--destination-mac MAC', "MAC of destination device" ) do |f|
+  opts.on( '-m', '--destination-mac MAC', "MAC of destination device" ) do |f|
     options[:destination_mac] = f
   end
 
-  options[:destination_port] = ""
-  opts.on( '-dp', '--destination-port PORT', "Port number of destination device" ) do |f|
+  opts.on( '-p', '--destination-port PORT', Integer, "Port number of destination device" ) do |f|
     options[:destination_port] = f
   end
 
-  options[:source_ip] = ""
-  opts.on( '-si', '--source-ip IP', "IP of source device" ) do |f|
+  opts.on( '-a', '--source-ip IP', "IP of source device" ) do |f|
     options[:source_ip] = f
   end
 
-  options[:source_mac] = ""
-  opts.on( '-sm', '--source-mac MAC', "MAC of source device" ) do |f|
+  opts.on( '-n', '--source-mac MAC', "MAC of source device" ) do |f|
     options[:source_mac] = f
   end
 
-  options[:size] = 10
-  opts.on( '-s', '--size INTEGER', "Size of the array to inject (default: 10)" ) do |f|
-    options[:size] = f
+  opts.on( '-s', '--size INTEGER', Integer, "Size of the array to inject (default: 10)" ) do |f|
+    options[:size] = f || 10
   end
 
-  options[:runs] = 100
-  opts.on( '-r', '--runs INTEGER', "How many iterations (default: 100)" ) do |f|
-    options[:runs] = f
+  opts.on( '-r', '--runs INTEGER', Integer, "How many iterations (default: 100)" ) do |f|
+    options[:runs] = f || 100
   end
 
-  options[:load] = 8
   opts.on( '-l', '--load INTEGER', "Size of the payload (default: 8)" ) do |f|
-    options[:load] = f
+    options[:load] = f || 8
   end
 
-  options[:interface] = "eth0"
   opts.on( '-i', '--interface INTERFACE', "Name of the interface (default: eth0)" ) do |f|
-    options[:interface] = f
+    options[:interface] = f || "eth0"
   end
 
-  options[:ttl] = 64
   opts.on( '-t', '--ttl INTEGER', "Time to live (ttl) (default: 64)" ) do |f|
-    options[:ttl] = f
+    options[:ttl] = f || 64
   end
 
-  opts.on('-h', '--help', 'Display this screen') do
+
+
+  # debug / help options
+  opts.on("-f", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+
+  opts.on_tail('-h', '--help', 'Display this screen') do
     puts opts
+    exit
+  end
+
+  opts.on_tail('-v', "--version", "Show version") do
+    puts Flooderfu::VERSION
     exit
   end
 end
