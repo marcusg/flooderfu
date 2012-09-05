@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+# -*- encoding: utf-8 -*-
 
 require 'flooderfu'
 require 'optparse'
@@ -8,10 +8,8 @@ options = {}
 
 optparse = OptionParser.new do |opts|
 
-  opts.banner = "Usage: example.rb [options]"
-
   opts.separator ""
-  opts.separator "Specific options:"
+  opts.separator "Options:"
 
   opts.on( '-x', '--mode TYPE', [:syn, :icmp], "Select a type of attack (syn or icmp)" ) do |f|
     options[:mode] = f
@@ -37,6 +35,9 @@ optparse = OptionParser.new do |opts|
     options[:source_mac] = f
   end
 
+  opts.separator ""
+
+
   opts.on( '-s', '--size INTEGER', Integer, "Size of the array to inject (default: 10)" ) do |f|
     options[:size] = f || 10
   end
@@ -57,7 +58,7 @@ optparse = OptionParser.new do |opts|
     options[:ttl] = f || 64
   end
 
-
+  opts.separator ""
 
   # debug / help options
   opts.on("-f", "--[no-]verbose", "Run verbosely") do |v|

@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'flooderfu'
+
+opts = Flooderfu::Syn::Options.new(ARGV)
+Flooderfu::Syn::Attack.new(opts)

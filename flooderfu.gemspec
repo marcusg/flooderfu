@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{script collection for flooding devices with different types of packets}
   gem.homepage      = "https://github.com/marcusg/flooderfu"
 
-  gem.files         = `git ls-files`.split($\)
-  gem.executables   = ["flooderfu"]
+  gem.files         = `git ls-files -o`.split($\)
+  gem.executables   = ["flooderfu-icmp", "flooderfu-syn"]
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "flooderfu"
   gem.require_paths = ["lib"]
