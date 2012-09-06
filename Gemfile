@@ -4,4 +4,4 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'packetfu'
-gem 'pry'
+gem 'pcaprub'

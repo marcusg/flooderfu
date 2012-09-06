@@ -4,81 +4,99 @@ require 'flooderfu'
 require 'optparse'
 require 'pp'
 
-options = {}
+module Flooderfu
+  module Icmp
 
-optparse = OptionParser.new do |opts|
+    class Options
+      include Flooderfu::Network
 
-  opts.separator ""
-  opts.separator "Options:"
+      attr_accessor :destination_ip, :destination_mac, :source_ip, :source_mac,
+                    :size, :load, :ttl, :runs, :interface, :verbose
 
-  opts.on( '-x', '--mode TYPE', [:syn, :icmp], "Select a type of attack (syn or icmp)" ) do |f|
-    options[:mode] = f
-  end
+      INTERFACE = "eth0"
+      SIZE = 10
+      RUNS = 100
+      LOAD = 8
+      TTL = 64
 
-  opts.on( '-d', '--destination-ip IP', "IP of destination device" ) do |f|
-    options[:destination_ip] = f
-  end
+      def initialize(*args)
 
-  opts.on( '-m', '--destination-mac MAC', "MAC of destination device" ) do |f|
-    options[:destination_mac] = f
-  end
+        optparse = OptionParser.new do |opts|
+          opts.separator ""
+          opts.separator "Options:"
 
-  opts.on( '-p', '--destination-port PORT', Integer, "Port number of destination device" ) do |f|
-    options[:destination_port] = f
-  end
+          @destination_ip = random_ip
+          opts.on('-d', '--destination-ip IP', "IP of destination device (default: random)") do |f|
+            @destination_ip = f
+          end
 
-  opts.on( '-a', '--source-ip IP', "IP of source device" ) do |f|
-    options[:source_ip] = f
-  end
+          @destination_mac = random_mac
+          opts.on('-m', '--destination-mac MAC', "MAC of destination device (default: random)") do |f|
+            @destination_mac = f
+          end
 
-  opts.on( '-n', '--source-mac MAC', "MAC of source device" ) do |f|
-    options[:source_mac] = f
-  end
+          @source_ip = random_ip
+          opts.on( '-a', '--source-ip IP', "IP of source device" ) do |f|
+            @source_mac = f
+          end
 
-  opts.separator ""
+          @source_mac = random_mac
+          opts.on( '-n', '--source-mac MAC', "MAC of source device" ) do |f|
+            @source_mac = f
+          end
+
+          opts.separator ""
 
 
-  opts.on( '-s', '--size INTEGER', Integer, "Size of the array to inject (default: 10)" ) do |f|
-    options[:size] = f || 10
-  end
+          @load = LOAD
+          opts.on('-l', '--load INTEGER', "Size of the payload (default: #{LOAD})") do |f|
+            @load = f
+          end
 
-  opts.on( '-r', '--runs INTEGER', Integer, "How many iterations (default: 100)" ) do |f|
-    options[:runs] = f || 100
-  end
+          @ttl = TTL
+          opts.on('-t', '--ttl INTEGER', "Time to live (ttl) (default: #{TTL})") do |f|
+            @ttl = f
+          end
 
-  opts.on( '-l', '--load INTEGER', "Size of the payload (default: 8)" ) do |f|
-    options[:load] = f || 8
-  end
+          @size = SIZE
+          opts.on('-s', '--size INTEGER', Integer, "Size of the array to inject (default: #{SIZE})") do |f|
+            @size = f
+          end
 
-  opts.on( '-i', '--interface INTERFACE', "Name of the interface (default: eth0)" ) do |f|
-    options[:interface] = f || "eth0"
-  end
+          @runs = RUNS
+          opts.on('-r', '--runs INTEGER', Integer, "How many iterations (default: #{RUNS})") do |f|
+            @runs = f
+          end
 
-  opts.on( '-t', '--ttl INTEGER', "Time to live (ttl) (default: 64)" ) do |f|
-    options[:ttl] = f || 64
-  end
+          @interface = INTERFACE
+          opts.on('-i', '--interface INTERFACE', "Name of the interface (default: #{INTERFACE})") do |f|
+            @interface = f
+          end
 
-  opts.separator ""
+          opts.separator ""
 
-  # debug / help options
-  opts.on("-f", "--[no-]verbose", "Run verbosely") do |v|
-    options[:verbose] = v
-  end
+          # debug / help options
+          @verbose = false
+          opts.on("-f", "--[no-]verbose", "Run verbosely") do |v|
+            @verbose = true
+          end
 
-  opts.on_tail('-h', '--help', 'Display this screen') do
-    puts opts
-    exit
-  end
+          opts.on_tail('-h', '--help', 'Display this screen') do
+            puts opts
+            exit
+          end
 
-  opts.on_tail('-v', "--version", "Show version") do
-    puts Flooderfu::VERSION
-    exit
+          opts.on_tail('-v', "--version", "Show version") do
+            puts Flooderfu::VERSION
+            exit
+          end
+        end
+
+        optparse.parse!
+      end
+
+    end
+
   end
 end
 
-
-optparse.parse!
-
-pp "Options:", options
-pp "ARGV:", ARGV
-Flooderfu::Syn.new

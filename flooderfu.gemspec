@@ -13,5 +13,6 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "flooderfu"
   gem.require_paths = ["lib"]
+  gem.add_runtime_dependency "pcaprub"
   gem.version       = Flooderfu::VERSION
 end

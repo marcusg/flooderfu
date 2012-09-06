@@ -3,4 +3,5 @@
 require 'flooderfu'
 
 opts = Flooderfu::Syn::Options.new(ARGV)
-Flooderfu::Syn::Attack.new(opts)
+syn = Flooderfu::Syn::Attack.new(opts)
+syn.start!

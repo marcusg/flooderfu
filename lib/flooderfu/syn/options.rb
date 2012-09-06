@@ -39,12 +39,12 @@ module Flooderfu
           end
 
           @size = SIZE
-          opts.on('-s', '--size INTEGER', "Size of the array to inject (default: #{SIZE})") do |f|
+          opts.on('-s', '--size INTEGER', Integer, "Size of the array to inject (default: #{SIZE})") do |f|
             @size = f
           end
 
           @runs = RUNS
-          opts.on('-r', '--runs INTEGER', "How many iterations (default: #{RUNS})") do |f|
+          opts.on('-r', '--runs INTEGER', Integer, "How many iterations (default: #{RUNS})") do |f|
             @runs = f
           end
 
@@ -75,25 +75,9 @@ module Flooderfu
         optparse.parse!
       end
 
-      def valid?
-
-      end
-
-      def build_package
-
-      end
-
-
     end
 
   end
 end
 
 
-
-
-
-
-# pp "Options:", options
-# pp "ARGV:", ARGV
-# Flooderfu::Syn.new
