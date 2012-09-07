@@ -28,11 +28,11 @@ Or install it yourself if you just want to use the commandline tools:
 
 For using the syn-flooder use:
 
-    `$ flooderfu-syn --help`
+    $ flooderfu-syn --help
 
 And for the icmp-flooder:
 
-    `$ flooderfu-icmp --help`
+    $ flooderfu-icmp --help
 
 ## In your Ruby files use it like:
 
