@@ -27,16 +27,19 @@ Or install it yourself if you just want to use the commandline tools:
 ## Commandline
 
 For using the syn-flooder use:
-    $ flooderfu-syn --help
+
+    `$ flooderfu-syn --help`
 
 And for the icmp-flooder:
-    $ flooderfu-icmp --help
+
+    `$ flooderfu-icmp --help`
 
 ## In your Ruby files use it like:
+
     @opt = Flooderfu::Syn::Options.new :destination_ip => "xxx.xxx.xxx.xxx", :destination_mac => "xx:xx:xx:xx:xx:xx", :interface => "eth0"
     @syn = Flooderfu::Syn::Attack.new(@opt).start!
 
-To show all options use the commandline tools with parameter --help
+To show all options use the commandline tools with parameter `--help`
 
 ## Contributing
 
