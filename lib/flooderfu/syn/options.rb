@@ -1,9 +1,7 @@
-# -*- encoding: utf-8 -*-
+# -*- encoding : utf-8 -*-
 
 require 'flooderfu'
 require 'optparse'
-
-
 
 module Flooderfu
   module Syn
@@ -67,7 +65,7 @@ module Flooderfu
           end
 
           opts.on_tail('-v', "--version", "Show version") do
-            puts Flooderfu::VERSION
+            puts "Flooderfu #{Flooderfu::VERSION}"
             exit
           end
         end
@@ -79,5 +77,8 @@ module Flooderfu
 
   end
 end
+
+
+
 
 

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require "flooderfu/version"
 
 require "flooderfu/network"

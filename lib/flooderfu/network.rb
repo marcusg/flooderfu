@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Flooderfu
   module Network
 

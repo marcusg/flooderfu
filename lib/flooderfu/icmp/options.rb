@@ -1,8 +1,7 @@
-# -*- encoding: utf-8 -*-
+# -*- encoding : utf-8 -*-
 
 require 'flooderfu'
 require 'optparse'
-require 'pp'
 
 module Flooderfu
   module Icmp
@@ -99,4 +98,3 @@ module Flooderfu
 
   end
 end
-
