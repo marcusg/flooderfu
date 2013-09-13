@@ -1,7 +1,5 @@
 # Flooderfu
 
-WARNING: WORK IN PROGRESS! NOT READY TO USE ;)
-
 Flooderfu is a simple toolset for flooding devices with different kinds of packages (atm: icmp, syn). It is based on the very nice gem *packetfu* created by Tod Beardsley (https://github.com/todb/packetfu). Use this only to (penetration-) test your own devices!
 
 ## Installation
@@ -38,7 +36,7 @@ And for the icmp-flooder:
 
 Try the rvmsudo command if you're using rvm. For example:
 
-    $ rvmsudo flooderfu-icmp -i eht0
+    $ rvmsudo flooderfu-icmp -i eth0
 
 ## In your Ruby files use it like:
 
