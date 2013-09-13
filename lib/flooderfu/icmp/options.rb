@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-
 require 'flooderfu'
 require 'optparse'
 
@@ -46,14 +45,13 @@ module Flooderfu
 
           opts.separator ""
 
-
           @load = LOAD
-          opts.on('-l', '--load INTEGER', "Size of the payload (default: #{LOAD})") do |f|
+          opts.on('-l', '--load INTEGER', Integer, "Size of the payload (default: #{LOAD})") do |f|
             @load = f
           end
 
           @ttl = TTL
-          opts.on('-t', '--ttl INTEGER', "Time to live (ttl) (default: #{TTL})") do |f|
+          opts.on('-t', '--ttl INTEGER', Integer, "Time to live (ttl) (default: #{TTL})") do |f|
             @ttl = f
           end
 
@@ -86,7 +84,7 @@ module Flooderfu
           end
 
           opts.on_tail('-v', "--version", "Show version") do
-            puts Flooderfu::VERSION
+            puts "Flooderfu #{Flooderfu::VERSION}"
             exit
           end
         end

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-
 require 'flooderfu'
 
 opts = Flooderfu::Icmp::Options.new(ARGV)
-Flooderfu::Icmp::Attack.new(opts)
+icmp = Flooderfu::Icmp::Attack.new(opts)
+icmp.start!

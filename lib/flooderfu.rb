@@ -2,6 +2,7 @@
 require "flooderfu/version"
 
 require "flooderfu/network"
+require "flooderfu/errors"
 
 require 'flooderfu/syn/attack'
 require 'flooderfu/syn/options'

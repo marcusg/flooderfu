@@ -6,12 +6,14 @@ module Flooderfu
     class Attack
 
       include Flooderfu::Network
+      include Flooderfu::Errors
 
       attr_accessor :packet, :injection, :options
 
       def initialize(opts)
         @options = opts
         @injection = PacketFu::Inject.new(:iface => @options.interface)
+        raise InvalidOptionsError.new("Check the options!") unless valid_options?
         craft_package!
       end
 
@@ -40,12 +42,11 @@ module Flooderfu
         log "elapsed time for #{@options.runs*@options.size} packets: #{Time.now - time} seconds"
       end
 
-      def change
-
-      end
-
       def valid_options?
-
+        return false unless is_port?(@options.destination_port)
+        return false unless is_mac?(@options.destination_mac)
+        return false unless is_ip?(@options.destination_ip)
+        true
       end
 
       protected
